@@ -56,12 +56,12 @@ export default function MenuPage() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.98 }}
             transition={{ duration: 0.5 }}
-            className="relative h-48 md:h-64 rounded-sm overflow-hidden mb-10"
+            className="relative mx-auto h-56 sm:h-64 md:h-72 max-w-4xl rounded-sm overflow-hidden mb-10 bg-midnight/80 border border-gold/10"
           >
             <img
               src={categoryImages[activeCategory]}
               alt={categoryLabels[activeCategory]}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-midnight via-midnight/60 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-6">
