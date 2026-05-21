@@ -127,9 +127,9 @@ export interface SiteConfig {
 
 // Edit this file when reusing the site for a new restaurant client.
 export const siteConfig = {
-  restaurantName: 'Spice & Valley',
+  restaurantName: 'Zam Zam Kebab',
   logoImage,
-  heroTitle: 'Spice & Valley',
+  heroTitle: 'Premium Kebab',
   heroSubtitle: 'Fast Food Gourmand au Bourget',
   heroDescription:
     'Burgers smashes, poulet croustillant, wraps savoureux. Le gout authentique, servi vite et bien.',

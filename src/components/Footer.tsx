@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
+import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Utensils, MapPin, Phone, Clock } from 'lucide-react';
+import siteConfig from '../data/siteConfig';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -18,12 +20,11 @@ export default function Footer() {
             <div className="flex items-center gap-2 mb-4">
               <Utensils size={24} className="text-gold" />
               <h3 className="text-2xl font-playfair font-bold text-gold">
-                Spice & Valley
+                {siteConfig.restaurantName}
               </h3>
             </div>
             <p className="text-cream/50 leading-relaxed font-light text-sm">
-              L'authenticite culinaire au Bourget. Decouvrez nos delicieux burgers,
-              wraps et poulet epice prepares avec passion.
+              {siteConfig.footer.description}
             </p>
           </motion.div>
 
@@ -33,14 +34,11 @@ export default function Footer() {
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            <h4 className="text-sm font-bold text-cream mb-4 tracking-widest uppercase">Navigation</h4>
+            <h4 className="text-sm font-bold text-cream mb-4 tracking-widest uppercase">
+              {siteConfig.footer.navigationTitle}
+            </h4>
             <ul className="space-y-2">
-              {[
-                { label: 'Accueil', to: '/' },
-                { label: 'La Carte', to: '/carte' },
-                { label: 'Reservation', to: '/reservation' },
-                { label: 'Contact', to: '/contact' },
-              ].map((link) => (
+              {siteConfig.navigation.map((link) => (
                 <li key={link.to}>
                   <Link
                     to={link.to}
@@ -59,20 +57,22 @@ export default function Footer() {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <h4 className="text-sm font-bold text-cream mb-4 tracking-widest uppercase">Horaires</h4>
+            <h4 className="text-sm font-bold text-cream mb-4 tracking-widest uppercase">
+              {siteConfig.footer.hoursTitle}
+            </h4>
             <ul className="space-y-2 text-cream/50 text-sm font-light">
               <li className="flex items-center gap-2">
                 <Clock size={14} className="text-gold/50" />
-                Lundi - Dimanche
+                {siteConfig.hours.days}
               </li>
-              <li className="pl-[22px]">06h00 - 00h00</li>
+              <li className="pl-[22px]">{siteConfig.hours.time}</li>
               <li className="flex items-center gap-2 pt-2">
                 <MapPin size={14} className="text-gold/50" />
-                11b Av. Francis de Pressense, 93350 Le Bourget
+                {siteConfig.address.full}
               </li>
               <li className="flex items-center gap-2 pt-1">
                 <Phone size={14} className="text-gold/50" />
-                09 54 75 24 84
+                {siteConfig.phone.display}
               </li>
             </ul>
           </motion.div>
@@ -83,16 +83,14 @@ export default function Footer() {
             transition={{ duration: 0.6, delay: 0.3 }}
             viewport={{ once: true }}
           >
-            <h4 className="text-sm font-bold text-cream mb-4 tracking-widest uppercase">Suivez-nous</h4>
+            <h4 className="text-sm font-bold text-cream mb-4 tracking-widest uppercase">
+              {siteConfig.footer.socialTitle}
+            </h4>
             <div className="flex gap-3">
-              {[
-                { name: 'Facebook', icon: 'f' },
-                { name: 'Instagram', icon: 'ig' },
-                { name: 'WhatsApp', icon: 'wa' },
-              ].map((social) => (
+              {siteConfig.footer.socialLinks.map((social) => (
                 <a
                   key={social.name}
-                  href="#"
+                  href={social.href}
                   className="w-10 h-10 glass-gold hover:bg-gold hover:text-midnight text-gold/60 rounded-full flex items-center justify-center transition-all duration-300 font-bold text-xs"
                 >
                   {social.icon}
@@ -109,9 +107,18 @@ export default function Footer() {
           viewport={{ once: true }}
           className="border-t border-gold/10 pt-8 text-center text-cream/30 text-xs tracking-wide"
         >
-          <p>&copy; {currentYear} Spice & Valley. Tous droits reserves.</p>
+          <p>
+            &copy; {currentYear} {siteConfig.restaurantName}.{' '}
+            {siteConfig.footer.copyrightText}
+          </p>
           <p className="mt-2">
-            Restaurant Authentique au Bourget, Paris | Burgers &bull; Wraps &bull; Poulet Epice
+            {siteConfig.footer.taglinePrefix} |{' '}
+            {siteConfig.footer.taglineItems.map((item, index) => (
+              <Fragment key={item}>
+                {index > 0 && <> &bull; </>}
+                {item}
+              </Fragment>
+            ))}
           </p>
         </motion.div>
       </div>

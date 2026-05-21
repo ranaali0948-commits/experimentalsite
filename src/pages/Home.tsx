@@ -1,10 +1,17 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ChevronDown, Star, UtensilsCrossed, Clock, MapPin } from 'lucide-react';
+import siteConfig from '../data/siteConfig';
 
 const reveal = {
   hidden: { opacity: 0, y: 40 },
   visible: { opacity: 1, y: 0 },
+};
+
+const featureIcons = {
+  utensils: UtensilsCrossed,
+  clock: Clock,
+  mapPin: MapPin,
 };
 
 export default function Home() {
@@ -13,6 +20,9 @@ export default function Home() {
   const textScale = useTransform(scrollY, [0, 500], [1.15, 1]);
   const textOpacity = useTransform(scrollY, [0, 400], [1, 0]);
   const overlayOpacity = useTransform(scrollY, [0, 600], [0.7, 0.95]);
+  const [heroTitleBefore, heroTitleAfter] = siteConfig.heroTitle
+    .split('&')
+    .map((part) => part.trim());
 
   return (
     <>
@@ -25,8 +35,7 @@ export default function Home() {
           <div
             className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage:
-                'url("https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?auto=format&fit=crop&w=1600&q=80")',
+              backgroundImage: `url("${siteConfig.heroImage}")`,
             }}
           />
         </motion.div>
@@ -48,7 +57,7 @@ export default function Home() {
               className="mb-6"
             >
               <span className="inline-block text-gold text-sm tracking-[0.3em] uppercase font-medium">
-                Restaurant Gourmand
+                {siteConfig.home.eyebrow}
               </span>
             </motion.div>
 
@@ -58,7 +67,14 @@ export default function Home() {
               transition={{ duration: 1, delay: 0.2 }}
               className="text-5xl md:text-7xl lg:text-8xl font-playfair font-bold text-cream mb-6 leading-[1.1]"
             >
-              Spice <span className="text-gold italic">&</span> Valley
+              {heroTitleAfter ? (
+                <>
+                  {heroTitleBefore} <span className="text-gold italic">&</span>{' '}
+                  {heroTitleAfter}
+                </>
+              ) : (
+                siteConfig.heroTitle
+              )}
             </motion.h1>
 
             <motion.div
@@ -74,7 +90,7 @@ export default function Home() {
               transition={{ duration: 0.9, delay: 0.4 }}
               className="text-xl md:text-2xl text-gold/90 mb-4 font-playfair italic tracking-wide"
             >
-              Fast Food Gourmand au Bourget
+              {siteConfig.heroSubtitle}
             </motion.p>
 
             <motion.p
@@ -83,8 +99,7 @@ export default function Home() {
               transition={{ duration: 0.9, delay: 0.55 }}
               className="text-base text-cream/60 mb-12 leading-relaxed max-w-xl mx-auto font-light"
             >
-              Burgers smashes, poulet croustillant, wraps savoureux.
-              Le gout authentique, servi vite et bien.
+              {siteConfig.heroDescription}
             </motion.p>
 
             <motion.div
@@ -97,13 +112,13 @@ export default function Home() {
                 to="/carte"
                 className="px-8 py-3.5 bg-gold text-midnight font-bold rounded-sm hover:bg-cream transition-all duration-300 text-sm tracking-widest uppercase"
               >
-                Decouvrir la Carte
+                {siteConfig.home.primaryButton}
               </Link>
               <Link
                 to="/reservation"
                 className="px-8 py-3.5 border border-gold/50 text-gold font-bold rounded-sm hover:bg-gold hover:text-midnight transition-all duration-300 text-sm tracking-widest uppercase"
               >
-                Reserver
+                {siteConfig.home.secondaryButton}
               </Link>
             </motion.div>
           </motion.div>
@@ -122,43 +137,31 @@ export default function Home() {
       <section className="py-24 bg-midnight">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: UtensilsCrossed,
-                title: 'Saveurs Authentiques',
-                desc: 'Des recettes originales, des ingredients frais et un savoir-faire unique pour chaque plat.',
-              },
-              {
-                icon: Clock,
-                title: 'Service Rapide',
-                desc: 'Votre commande preparee avec soin et servie rapidement, sans compromis sur la qualite.',
-              },
-              {
-                icon: MapPin,
-                title: 'Le Bourget, Paris',
-                desc: '11b Av. Francis de Pressense, 93350 Le Bourget. Ouvert tous les jours de 06h00 a 00h00.',
-              },
-            ].map((feature, i) => (
-              <motion.div
-                key={feature.title}
-                variants={reveal}
-                initial="hidden"
-                whileInView="visible"
-                transition={{ duration: 0.7, delay: i * 0.15 }}
-                viewport={{ once: true }}
-                className="glass-gold rounded-sm p-8 text-center group hover:border-gold/30 transition-all duration-500"
-              >
-                <div className="w-14 h-14 mx-auto mb-5 rounded-full border border-gold/20 flex items-center justify-center group-hover:bg-gold/10 transition-colors duration-500">
-                  <feature.icon size={24} className="text-gold" />
-                </div>
-                <h3 className="text-lg font-playfair font-semibold text-cream mb-3">
-                  {feature.title}
-                </h3>
-                <p className="text-cream/50 text-sm font-light leading-relaxed">
-                  {feature.desc}
-                </p>
-              </motion.div>
-            ))}
+            {siteConfig.home.features.map((feature, i) => {
+              const Icon = featureIcons[feature.icon];
+
+              return (
+                <motion.div
+                  key={feature.title}
+                  variants={reveal}
+                  initial="hidden"
+                  whileInView="visible"
+                  transition={{ duration: 0.7, delay: i * 0.15 }}
+                  viewport={{ once: true }}
+                  className="glass-gold rounded-sm p-8 text-center group hover:border-gold/30 transition-all duration-500"
+                >
+                  <div className="w-14 h-14 mx-auto mb-5 rounded-full border border-gold/20 flex items-center justify-center group-hover:bg-gold/10 transition-colors duration-500">
+                    <Icon size={24} className="text-gold" />
+                  </div>
+                  <h3 className="text-lg font-playfair font-semibold text-cream mb-3">
+                    {feature.title}
+                  </h3>
+                  <p className="text-cream/50 text-sm font-light leading-relaxed">
+                    {feature.desc}
+                  </p>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -174,14 +177,16 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <div className="flex justify-center gap-1 mb-6">
-              {[...Array(5)].map((_, i) => (
+              {Array.from({ length: siteConfig.home.testimonial.rating }).map((_, i) => (
                 <Star key={i} size={18} className="text-gold fill-gold" />
               ))}
             </div>
             <blockquote className="text-2xl md:text-3xl font-playfair italic text-cream/80 mb-6 leading-relaxed">
-              "Le meilleur Smash Burger du Bourget ! Service rapide et viande de qualite."
+              "{siteConfig.home.testimonial.text}"
             </blockquote>
-            <p className="text-gold/60 text-sm tracking-widest uppercase">Avis Client</p>
+            <p className="text-gold/60 text-sm tracking-widest uppercase">
+              {siteConfig.home.testimonial.label}
+            </p>
           </motion.div>
         </div>
       </section>
@@ -198,23 +203,27 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl md:text-5xl font-playfair font-bold text-cream mb-4">
-              Pret a <span className="text-gold italic">deguster</span> ?
+              {siteConfig.home.ctaTitleBefore}{' '}
+              <span className="text-gold italic">
+                {siteConfig.home.ctaTitleHighlight}
+              </span>{' '}
+              {siteConfig.home.ctaTitleAfter}
             </h2>
             <p className="text-cream/50 font-light mb-10 max-w-lg mx-auto">
-              Commandez maintenant ou reservez votre table pour une experience gourmande inoubliable.
+              {siteConfig.home.ctaText}
             </p>
             <div className="flex gap-4 justify-center flex-wrap">
               <Link
                 to="/carte"
                 className="px-8 py-3.5 bg-gold text-midnight font-bold rounded-sm hover:bg-cream transition-all duration-300 text-sm tracking-widest uppercase"
               >
-                Commander
+                {siteConfig.home.ctaPrimaryButton}
               </Link>
               <Link
                 to="/reservation"
                 className="px-8 py-3.5 border border-gold/50 text-gold font-bold rounded-sm hover:bg-gold hover:text-midnight transition-all duration-300 text-sm tracking-widest uppercase"
               >
-                Reserver une Table
+                {siteConfig.home.ctaSecondaryButton}
               </Link>
             </div>
           </motion.div>

@@ -1,20 +1,6 @@
 import { motion } from 'framer-motion';
 import { Star, Quote } from 'lucide-react';
-
-const reviews = [
-  {
-    text: 'Le meilleur Smash Burger du Bourget ! Service rapide et viande de qualite.',
-    rating: 5,
-  },
-  {
-    text: 'Les Cheese Naans sont incroyables. Une adresse a ne pas manquer.',
-    rating: 5,
-  },
-  {
-    text: 'Super rapport qualite-prix. Les menus Family sont parfaits pour le weekend.',
-    rating: 5,
-  },
-];
+import siteConfig from '../data/siteConfig';
 
 const reveal = {
   hidden: { opacity: 0, y: 30 },
@@ -33,15 +19,15 @@ export default function Reviews() {
           className="text-center mb-14"
         >
           <span className="inline-block text-gold text-xs tracking-[0.3em] uppercase font-medium mb-4">
-            Temoignages
+            {siteConfig.reviewsSection.eyebrow}
           </span>
           <h2 className="text-4xl md:text-5xl font-playfair font-bold text-cream">
-            Avis Clients
+            {siteConfig.reviewsSection.title}
           </h2>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-6">
-          {reviews.map((review, i) => (
+          {siteConfig.reviews.map((review, i) => (
             <motion.div
               key={i}
               variants={reveal}
@@ -56,7 +42,7 @@ export default function Reviews() {
                 {review.text}
               </p>
               <div className="flex gap-0.5">
-                {[...Array(review.rating)].map((_, j) => (
+                {Array.from({ length: review.rating }).map((_, j) => (
                   <Star key={j} size={14} className="text-gold fill-gold" />
                 ))}
               </div>

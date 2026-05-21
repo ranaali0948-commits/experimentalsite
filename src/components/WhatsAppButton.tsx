@@ -1,11 +1,12 @@
 import { MessageCircle, Phone } from 'lucide-react';
 import { motion } from 'framer-motion';
+import siteConfig from '../data/siteConfig';
 
 export default function WhatsAppButton() {
   return (
     <div className="fixed bottom-6 left-6 z-40 flex flex-col gap-3">
       <motion.a
-        href="tel:0954752484"
+        href={siteConfig.phone.telHref}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         aria-label="Appelez-nous"
@@ -15,7 +16,7 @@ export default function WhatsAppButton() {
       </motion.a>
 
       <motion.a
-        href="https://wa.me/33954752484"
+        href={siteConfig.phone.whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
         whileHover={{ scale: 1.1 }}

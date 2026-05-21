@@ -4,9 +4,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        gold: '#D4AF37',
-        midnight: '#0A0A0B',
-        cream: '#f5f1e8',
+        gold: 'rgb(var(--color-gold, 212 175 55) / <alpha-value>)',
+        midnight: 'rgb(var(--color-midnight, 10 10 11) / <alpha-value>)',
+        cream: 'rgb(var(--color-cream, 245 241 232) / <alpha-value>)',
       },
       fontFamily: {
         playfair: ['Playfair Display', 'serif'],

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Clock, MessageCircle, Mail } from 'lucide-react';
+import siteConfig from '../data/siteConfig';
 
 const reveal = {
   hidden: { opacity: 0, y: 40 },
@@ -17,10 +18,10 @@ export default function ContactPage() {
           className="text-center mb-16"
         >
           <span className="inline-block text-gold text-xs tracking-[0.3em] uppercase font-medium mb-4">
-            Nous Trouver
+            {siteConfig.contactPage.eyebrow}
           </span>
           <h1 className="text-5xl md:text-6xl font-playfair font-bold text-cream mb-4">
-            Contact
+            {siteConfig.contactPage.title}
           </h1>
           <div className="w-16 h-px bg-gold mx-auto" />
         </motion.div>
@@ -40,9 +41,13 @@ export default function ContactPage() {
                 <MapPin size={20} className="text-gold" />
               </div>
               <div>
-                <h3 className="text-cream font-playfair font-semibold mb-1">Adresse</h3>
+                <h3 className="text-cream font-playfair font-semibold mb-1">
+                  {siteConfig.contactPage.addressLabel}
+                </h3>
                 <p className="text-cream/50 text-sm font-light leading-relaxed">
-                  11b Av. Francis de Pressense<br />93350 Le Bourget
+                  {siteConfig.address.street}
+                  <br />
+                  {siteConfig.address.postalCity}
                 </p>
               </div>
             </motion.div>
@@ -59,9 +64,11 @@ export default function ContactPage() {
                 <Phone size={20} className="text-gold" />
               </div>
               <div>
-                <h3 className="text-cream font-playfair font-semibold mb-1">Telephone</h3>
+                <h3 className="text-cream font-playfair font-semibold mb-1">
+                  {siteConfig.contactPage.phoneLabel}
+                </h3>
                 <p className="text-cream/50 text-sm font-light">
-                  09 54 75 24 84
+                  {siteConfig.phone.display}
                 </p>
               </div>
             </motion.div>
@@ -78,10 +85,13 @@ export default function ContactPage() {
                 <Clock size={20} className="text-gold" />
               </div>
               <div>
-                <h3 className="text-cream font-playfair font-semibold mb-1">Horaires</h3>
+                <h3 className="text-cream font-playfair font-semibold mb-1">
+                  {siteConfig.contactPage.hoursLabel}
+                </h3>
                 <p className="text-cream/50 text-sm font-light leading-relaxed">
-                  Lundi - Dimanche<br />
-                  06h00 - 00h00
+                  {siteConfig.hours.days}
+                  <br />
+                  {siteConfig.hours.time}
                 </p>
               </div>
             </motion.div>
@@ -98,9 +108,11 @@ export default function ContactPage() {
                 <Mail size={20} className="text-gold" />
               </div>
               <div>
-                <h3 className="text-cream font-playfair font-semibold mb-1">Email</h3>
+                <h3 className="text-cream font-playfair font-semibold mb-1">
+                  {siteConfig.contactPage.emailLabel}
+                </h3>
                 <p className="text-cream/50 text-sm font-light">
-                  contact@spiceandvalley.fr
+                  {siteConfig.email}
                 </p>
               </div>
             </motion.div>
@@ -112,13 +124,13 @@ export default function ContactPage() {
               whileInView="visible"
               transition={{ duration: 0.6, delay: 0.4 }}
               viewport={{ once: true }}
-              href="https://wa.me/33954752484"
+              href={siteConfig.phone.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 p-5 bg-gold text-midnight rounded-sm font-bold text-sm tracking-widest uppercase hover:bg-cream transition-all duration-300"
             >
               <MessageCircle size={20} />
-              Contactez-nous sur WhatsApp
+              {siteConfig.contactPage.whatsappText}
             </motion.a>
           </div>
 
@@ -132,8 +144,8 @@ export default function ContactPage() {
             className="glass-gold rounded-sm overflow-hidden h-full min-h-[400px]"
           >
             <iframe
-              title="Spice & Valley Location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.2!2d2.4167!3d48.9333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66d2e7b6a6a6d%3A0x0!2s11b+Av.+Francis+de+Pressens%C3%A9%2C+93350+Le+Bourget!5e0!3m2!1sfr!2sfr!4v1"
+              title={`${siteConfig.restaurantName} Location`}
+              src={siteConfig.address.mapEmbedUrl}
               width="100%"
               height="100%"
               style={{ border: 0, minHeight: 400 }}

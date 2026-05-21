@@ -2,13 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-
-const navItems = [
-  { label: 'Accueil', to: '/' },
-  { label: 'La Carte', to: '/carte' },
-  { label: 'Reservation', to: '/reservation' },
-  { label: 'Contact', to: '/contact' },
-];
+import siteConfig from '../data/siteConfig';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,12 +31,12 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
         <Link to="/" className="flex items-center gap-3">
           <span className="text-2xl font-playfair font-bold text-gold tracking-wide">
-            Spice & Valley
+            {siteConfig.restaurantName}
           </span>
         </Link>
 
         <nav className="hidden md:flex gap-8">
-          {navItems.map((item) => (
+          {siteConfig.navigation.map((item) => (
             <Link
               key={item.label}
               to={item.to}
@@ -76,7 +70,7 @@ export default function Header() {
             className="md:hidden glass-gold border-t border-gold/10"
           >
             <nav className="flex flex-col gap-1 px-4 py-4">
-              {navItems.map((item) => (
+              {siteConfig.navigation.map((item) => (
                 <Link
                   key={item.label}
                   to={item.to}

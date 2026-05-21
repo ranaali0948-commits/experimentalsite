@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, Clock, Users, Phone, User, CheckCircle } from 'lucide-react';
+import siteConfig from '../data/siteConfig';
 
 const WEB3FORMS_KEY = 'a200ed1d-6f30-496e-9579-d6031157a982';
 
@@ -40,7 +41,7 @@ export default function ReservationPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           access_key: WEB3FORMS_KEY,
-          subject: 'Nouvelle reservation - Spice & Valley',
+          subject: `${siteConfig.reservationPage.subjectPrefix} - ${siteConfig.restaurantName}`,
           from_name: form.name,
           Nom_et_Prenom: form.name,
           Telephone: form.phone,
@@ -76,14 +77,14 @@ export default function ReservationPage() {
           className="text-center mb-14"
         >
           <span className="inline-block text-gold text-xs tracking-[0.3em] uppercase font-medium mb-4">
-            Reservez
+            {siteConfig.reservationPage.eyebrow}
           </span>
           <h1 className="text-5xl md:text-6xl font-playfair font-bold text-cream mb-4">
-            Reservation
+            {siteConfig.reservationPage.title}
           </h1>
           <div className="w-16 h-px bg-gold mx-auto mb-6" />
           <p className="text-cream/50 font-light">
-            Reservez votre table et decouvrez une experience gourmande
+            {siteConfig.reservationPage.description}
           </p>
         </motion.div>
 
@@ -105,13 +106,13 @@ export default function ReservationPage() {
                   <CheckCircle size={32} className="text-gold" />
                 </div>
                 <h3 className="text-2xl font-playfair font-bold text-gold mb-3">
-                  Merci !
+                  {siteConfig.reservationPage.successTitle}
                 </h3>
                 <p className="text-cream/60 font-light">
-                  Votre demande a ete envoyee.
+                  {siteConfig.reservationPage.successMessage}
                 </p>
                 <p className="text-cream/40 text-sm mt-2 font-light">
-                  Nous vous confirmerons votre reservation par telephone.
+                  {siteConfig.reservationPage.successFollowUp}
                 </p>
               </motion.div>
             </motion.div>
@@ -205,7 +206,9 @@ export default function ReservationPage() {
                 disabled={sending}
                 className="w-full py-3.5 bg-gold text-midnight font-bold rounded-sm hover:bg-cream transition-all duration-300 text-sm tracking-widest uppercase disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {sending ? 'Envoi en cours...' : 'Envoyer la demande'}
+                {sending
+                  ? siteConfig.reservationPage.sendingText
+                  : siteConfig.reservationPage.submitText}
               </button>
             </motion.form>
           )}

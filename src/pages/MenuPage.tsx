@@ -1,62 +1,12 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import menuData from '../data/spice-valley-menu.json';
-
-interface MenuItem {
-  name: string;
-  description: string;
-  price: number;
-}
-
-interface Category {
-  id: string;
-  name: string;
-  note?: string;
-  items: MenuItem[];
-}
-
-const categoryLabels: Record<string, string> = {
-  deals: 'Bonnes Affaires',
-  smash_burgers: 'Smash Burgers',
-  burger_menus: 'Menus Burgers',
-  chicken_menus: 'Menus Poulet',
-  wraps_naans: 'Wraps & Naans',
-  family_boxes: 'Boites Familiales',
-  chicken_a_la_carte: 'Poulet (\u00C0 La Carte)',
-  burgers_a_la_carte: 'Burgers & Wraps (\u00C0 La Carte)',
-  starters: 'Entrees & Accompagnements',
-  kids: 'Menus Enfants',
-  desserts: 'Desserts',
-  drinks: 'Boissons',
-};
-
-const categoryNotes: Record<string, string> = {
-  burger_menus: 'Tous les menus incluent des frites et une boisson 33cl',
-  chicken_menus: 'Tous les menus incluent des frites et une boisson 33cl',
-  wraps_naans: 'Tous les menus incluent des frites et une boisson 33cl',
-  family_boxes: 'Toutes les boites incluent des grandes frites familiales et une boisson 1.5L',
-  kids: 'Tous les menus enfants incluent un Kinder, des frites et un Capri-Sun',
-};
-
-const categoryImages: Record<string, string> = {
-  deals: 'https://images.unsplash.com/photo-1561758033-d89a9ad46330?auto=format&fit=crop&w=800&q=80',
-  smash_burgers: 'https://images.unsplash.com/photo-1510739859545-e7b9e979de86?auto=format&fit=crop&w=800&q=80',
-  burger_menus: 'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=80',
-  chicken_menus: 'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=800&q=80',
-  wraps_naans: 'https://images.unsplash.com/photo-1601050690597-df056fb04791?auto=format&fit=crop&w=800&q=80',
-  family_boxes: 'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=800&q=80',
-  chicken_a_la_carte: 'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=800&q=80',
-  burgers_a_la_carte: 'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=80',
-  starters: 'https://images.unsplash.com/photo-1561758033-d89a9ad46330?auto=format&fit=crop&w=800&q=80',
-  kids: 'https://images.unsplash.com/photo-1561758033-d89a9ad46330?auto=format&fit=crop&w=800&q=80',
-  desserts: 'https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=800&q=80',
-  drinks: 'https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=800&q=80',
-};
+import siteConfig from '../data/siteConfig';
 
 export default function MenuPage() {
   const [activeCategory, setActiveCategory] = useState('deals');
-  const categories: Category[] = menuData.categories;
+  const categories = siteConfig.menuItems;
   const active = categories.find((c) => c.id === activeCategory);
+  const { categoryImages, categoryLabels, categoryNotes } = siteConfig.menuPage;
 
   const formatPrice = (price: number) =>
     price.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
@@ -71,10 +21,10 @@ export default function MenuPage() {
           className="text-center mb-16"
         >
           <span className="inline-block text-gold text-xs tracking-[0.3em] uppercase font-medium mb-4">
-            Nos Specialites
+            {siteConfig.menuPage.eyebrow}
           </span>
           <h1 className="text-5xl md:text-6xl font-playfair font-bold text-cream mb-4">
-            La Carte
+            {siteConfig.menuPage.title}
           </h1>
           <div className="w-16 h-px bg-gold mx-auto" />
         </motion.div>
