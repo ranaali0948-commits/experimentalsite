@@ -21,6 +21,9 @@ Replace these image files with the new client's images:
 - `gallery1.png`
 - `gallery2.png`
 - `gallery3.png`
+- `gallery4.png`
+- `gallery5.png`
+- `gallery6.png`
 
 Keep the same file names.
 

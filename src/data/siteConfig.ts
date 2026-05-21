@@ -3,8 +3,18 @@ import heroImage from '../assets/client/hero.png';
 import gallery1Image from '../assets/client/gallery1.png';
 import gallery2Image from '../assets/client/gallery2.png';
 import gallery3Image from '../assets/client/gallery3.png';
+import gallery4Image from '../assets/client/gallery4.png';
+import gallery5Image from '../assets/client/gallery5.png';
+import gallery6Image from '../assets/client/gallery6.png';
 
-const galleryImages = [gallery1Image, gallery2Image, gallery3Image];
+const galleryImages = [
+  gallery1Image,
+  gallery2Image,
+  gallery3Image,
+  gallery4Image,
+  gallery5Image,
+  gallery6Image,
+];
 
 export interface MenuItem {
   name: string;
@@ -755,15 +765,15 @@ export const siteConfig = {
       deals: galleryImages[0],
       smash_burgers: galleryImages[1],
       burger_menus: galleryImages[2],
-      chicken_menus: galleryImages[0],
-      wraps_naans: galleryImages[1],
-      family_boxes: galleryImages[2],
+      chicken_menus: galleryImages[3],
+      wraps_naans: galleryImages[4],
+      family_boxes: galleryImages[5],
       chicken_a_la_carte: galleryImages[0],
       burgers_a_la_carte: galleryImages[1],
       starters: galleryImages[2],
-      kids: galleryImages[0],
-      desserts: galleryImages[1],
-      drinks: galleryImages[2],
+      kids: galleryImages[3],
+      desserts: galleryImages[4],
+      drinks: galleryImages[5],
     },
   },
   contactPage: {
