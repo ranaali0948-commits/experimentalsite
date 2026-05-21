@@ -56,23 +56,27 @@ export default function MenuPage() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.98 }}
             transition={{ duration: 0.5 }}
-            className="relative h-52 sm:h-60 md:h-72 rounded-sm overflow-hidden mb-10 bg-midnight/80 border border-gold/10"
+            className="relative min-h-72 rounded-sm overflow-hidden mb-10 bg-midnight/80 border border-gold/10"
           >
-            <img
-              src={categoryImages[activeCategory]}
-              alt={categoryLabels[activeCategory]}
-              className="w-full h-full object-cover object-center"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-midnight via-midnight/60 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-6">
-              <h2 className="text-3xl md:text-4xl font-playfair font-bold text-cream">
-                {categoryLabels[activeCategory]}
-              </h2>
-              {(categoryNotes[activeCategory] || active?.note) && (
-                <p className="text-gold/60 text-sm italic font-playfair mt-1">
-                  {categoryNotes[activeCategory] || active?.note}
-                </p>
-              )}
+            <div className="absolute inset-0 bg-gradient-to-r from-midnight via-midnight/95 to-midnight/70" />
+            <div className="relative z-10 flex min-h-72 flex-col md:flex-row md:items-stretch">
+              <div className="flex flex-1 flex-col justify-end p-6 md:p-8">
+                <h2 className="text-3xl md:text-4xl font-playfair font-bold text-cream">
+                  {categoryLabels[activeCategory]}
+                </h2>
+                {(categoryNotes[activeCategory] || active?.note) && (
+                  <p className="text-gold/60 text-sm italic font-playfair mt-1">
+                    {categoryNotes[activeCategory] || active?.note}
+                  </p>
+                )}
+              </div>
+              <div className="h-56 md:h-auto md:w-[360px] lg:w-[400px] md:p-6">
+                <img
+                  src={categoryImages[activeCategory]}
+                  alt={categoryLabels[activeCategory]}
+                  className="h-full w-full object-cover object-center"
+                />
+              </div>
             </div>
           </motion.div>
         </AnimatePresence>
